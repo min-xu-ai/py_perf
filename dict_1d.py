@@ -64,11 +64,18 @@ def set():
             tmp = last
     return time.time() - s
 
+def scan():
+    global g_table
+    s = time.time()
+    for k in g_table:
+        _ = g_table[k][0]
+    return time.time() - s
+
 def main():
-    setup(1000000, 0.7)
-    #benchmark(get)
+    setup(500 * 1000, 0.7)
+    benchmark(get)
     benchmark(set)
-    #benchmark(scan)
+    benchmark(scan)
 
 if __name__ == "__main__":
     main()

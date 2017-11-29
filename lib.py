@@ -6,8 +6,9 @@ Benchmark library.
 Run a function a few times until the result has small stddev.
 '''
 
-import statistics
 import random
+import string
+import statistics
 
 def benchmark(f, loops=5, stddev=1):
     '''
@@ -27,12 +28,16 @@ def benchmark(f, loops=5, stddev=1):
         if perc < stddev:
             print(i, "%.3f seconds"%mean, "%.02f%%"%perc)
             break
+        #print(i, "%.3f seconds"%mean, "%.02f%%"%perc)
         assert i<100
 
 def random_tuple():
     ''' Return a random tuple. '''
     _len = 5
-    return [random.randint(0, 999) for _ in range(_len)]
+    str_list = [''.join(random.choice(string.ascii_uppercase + string.digits)
+        for _ in range(100)) for _ in range(_len)]
+    int_list = [random.randint(0, 999) for _ in range(_len)]
+    return str_list + int_list
 
 def unit_test():
     def f():

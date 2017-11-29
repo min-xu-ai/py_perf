@@ -63,11 +63,19 @@ def set():
             tmp = last
     return time.time() - s
 
+def scan():
+    global g_list
+    s = time.time()
+    for i in g_list:
+        if i is not None:
+            _ = i[0]
+    return time.time() - s
+
 def main():
-    setup(1000000, 0.7)
-    #benchmark(get)
+    setup(500 * 1000, 0.7)
+    benchmark(get)
     benchmark(set)
-    #benchmark(scan)
+    benchmark(scan)
 
 if __name__ == "__main__":
     main()
