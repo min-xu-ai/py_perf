@@ -55,3 +55,6 @@ dkms.conf
 *.pyc
 *.pyo
 __pycache__
+
+# vim
+*.swp

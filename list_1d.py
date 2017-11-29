@@ -1,7 +1,7 @@
 #!/usr/bin/env pypy3
 
 '''
-Testing 1D dict based data structure.
+Testing 1D list based data structure.
 '''
 
 import time
@@ -9,7 +9,7 @@ import random
 
 from lib import benchmark, random_tuple
 
-g_table = {}
+g_list = []
 g_size = 0
 g_count = 0
 g_get_keys = []
@@ -23,20 +23,19 @@ def setup(size, density):
     '''
     assert size > 0, size
     assert density > 0 and density <= 1, density
-    global g_table
+    global g_list
     global g_size
     global g_count
+    g_list = [None for _ in range(size)]
     count = size * 1.0 * density // 1
     g_size = size
     g_count = count
     i = 0
     while i < count:
         _key = random.randint(0, size-1)
-        if _key in g_table:
-            continue
-        g_table[_key] = random_tuple()
-        i += 1
-    # TODO (x): need fix the percentage of present keys.
+        if g_list[_key] is None:
+            g_list[_key] = random_tuple()
+            i += 1
     global g_get_keys
     for i in range(1000000):
         g_get_keys.append(random.randint(0, size-1))
@@ -48,8 +47,8 @@ def get():
     global g_get_keys
     s = time.time()
     for _key in g_get_keys:
-        if _key in g_table:
-            x = g_table[_key]
+        if g_list[_key] is not None:
+            x = g_list[_key]
     return time.time() - s
 
 def set():
@@ -58,9 +57,9 @@ def set():
     tmp = [1,2,3,4,5]
     s = time.time()
     for _key in g_set_keys:
-        if _key in g_table:
-            last = g_table[_key]
-            g_table[_key] = tmp
+        if g_list[_key] is not None:
+            last = g_list[_key]
+            g_list[_key] = tmp
             tmp = last
     return time.time() - s
 

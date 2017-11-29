@@ -25,8 +25,9 @@ def benchmark(f, loops=5, stddev=1):
         perc = (stdev * 100) / mean
         i += 1
         if perc < stddev:
-            print(i, "%.2f seconds"%mean, "%.02f%%"%perc)
+            print(i, "%.3f seconds"%mean, "%.02f%%"%perc)
             break
+        assert i<100
 
 def random_tuple():
     ''' Return a random tuple. '''
