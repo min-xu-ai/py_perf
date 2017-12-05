@@ -1,7 +1,7 @@
 #!/usr/bin/env pypy3
 
 '''
-Testing 2D list data structure by flatten 2D to 1D.
+Testing 2D list (list of lists) data structure.
 '''
 
 import time
@@ -26,15 +26,16 @@ def setup(size, density):
     global g_list
     global g_size
     global g_count
-    g_list = [None for _ in range(size*size)]
+    g_list = [[None]*size for _ in range(size)]
     count = size * size * 1.0 * density // 1
     g_size = size
     g_count = count
     i = 0
     while i < count:
-        _key = random.randint(0, size*size-1)
-        if g_list[_key] is None:
-            g_list[_key] = random_tuple()
+        idx = random.randint(0, size*size-1)
+        x, y = (idx // size, idx % size)
+        if g_list[x][y] is None:
+            g_list[x][y] = random_tuple()
             i += 1
     global g_get_keys
     for i in range(1000000):
@@ -49,9 +50,8 @@ def get():
     global g_size
     s = time.time()
     for _x, _y in g_get_keys:
-        _key = _x * g_size + _y
-        if g_list[_key] is not None:
-            x = g_list[_key]
+        if g_list[_x][_y] is not None:
+            x = g_list[_x][_y]
     return time.time() - s
 
 def set():
@@ -61,19 +61,19 @@ def set():
     tmp = [1,2,3,4,5]
     s = time.time()
     for _x, _y in g_set_keys:
-        _key = _x * g_size + _y
-        if g_list[_key] is not None:
-            last = g_list[_key]
-            g_list[_key] = tmp
+        if g_list[_x][_y] is not None:
+            last = g_list[_x][_y]
+            g_list[_x][_y] = tmp
             tmp = last
     return time.time() - s
 
 def scan():
     global g_list
     s = time.time()
-    for i in g_list:
-        if i is not None:
-            _ = i[0]
+    for x in g_list:
+        for i in x:
+            if i is not None:
+                _ = i[0]
     return time.time() - s
 
 def main():
