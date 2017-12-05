@@ -68,3 +68,22 @@ start benchmarking <function set at 0x7f276c8b80d0>
 start benchmarking <function scan at 0x7f276c8b8158>
 2 0.233 seconds 0.38%
 ```
+
+List of lists vs. flat 2D list in pypy:
+
+```
+min@server5 ~/ws/py_perf (master) $ ./list_2d_2.py
+start benchmarking <function get at 0x00007f5638abc2a0>
+2 0.068 seconds 0.14%
+start benchmarking <function set at 0x00007f5638abc340>
+2 0.070 seconds 0.14%
+start benchmarking <function scan at 0x00007f5638abc3e0>
+3 0.034 seconds 0.72%
+min@server5 ~/ws/py_perf (master) $ ./list_2d.py
+start benchmarking <function get at 0x00007efefa4782a0>
+2 0.076 seconds 0.72%
+start benchmarking <function set at 0x00007efefa478340>
+2 0.087 seconds 0.68%
+start benchmarking <function scan at 0x00007efefa4783e0>
+24 0.026 seconds 0.98%
+```
