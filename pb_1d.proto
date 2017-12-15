@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+message Tuple {
+	repeated int32 int = 1;
+	repeated string str = 2;
+}
+
+message Test {
+    repeated Tuple list = 1;
+}

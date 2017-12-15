@@ -87,3 +87,23 @@ start benchmarking <function set at 0x00007efefa478340>
 start benchmarking <function scan at 0x00007efefa4783e0>
 24 0.026 seconds 0.98%
 ```
+
+
+1D list vs. pb in pypy:
+```
+memory is 1.1G vs. 1.5G
+
+$ ./pb_1d.py  && ./list_1d.py
+start benchmarking <function get at 0x00007f1716bb9100>
+3 2.247 seconds 1.27%
+start benchmarking <function set at 0x00007f1716bb91a0>
+1 7.544 seconds 13.52%
+start benchmarking <function scan at 0x00007f1716bb9240>
+1 0.906 seconds 6.81%
+start benchmarking <function get at 0x00007f27db1de340>
+11 0.029 seconds 0.55%
+start benchmarking <function set at 0x00007f27db1de3e0>
+10 0.031 seconds 0.43%
+start benchmarking <function scan at 0x00007f27db1de480>
+87 0.031 seconds 1.62%
+```

@@ -58,3 +58,6 @@ __pycache__
 
 # vim
 *.swp
+
+# pb out
+*_pb2.py
